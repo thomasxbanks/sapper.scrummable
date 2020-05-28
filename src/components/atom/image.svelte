@@ -5,8 +5,9 @@
   export let hero = false;
   export let src = null;
   export let width = null;
-  // export let lazy = window ? "IntersectionObserver" in window : false;
   export let lazy = false;
+
+  import { beforeUpdate } from "svelte";
 
   let loading = true;
   let observer;
@@ -38,11 +39,14 @@
     };
   };
 
-  if (lazy) {
-    observer = new IntersectionObserver(onIntersect, {});
-  } else {
-    loading = false;
-  }
+  beforeUpdate(() => {
+    lazy = "IntersectionObserver" in window;
+    if (lazy) {
+      observer = new IntersectionObserver(onIntersect, {});
+    } else {
+      loading = false;
+    }
+  });
 </script>
 
 <style>
