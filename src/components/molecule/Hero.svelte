@@ -1,21 +1,28 @@
 <script>
   import { name } from "../../Config.js";
-  export let image = "images/default-hero.jpg";
-  export let copy = name;
+  export let image = null;
+  export let copy = null;
 
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
+
+  import Image from "../atom/image.svelte";
 
   let show = false;
   onMount(() => {
     show = true;
   });
+
+  console.log("I AM TEH IMAAAAAAGE", image);
 </script>
 
 <style>
   figure {
     position: relative;
     min-height: 50vh;
+  }
+  figure.dark {
+    background-color: black;
   }
   figcaption {
     position: relative;
@@ -32,15 +39,6 @@
     padding-bottom: 4vh;
     padding-left: 0;
   }
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
   h1 {
     font-family: "Comfortaa", sans-serif;
     color: white;
@@ -50,8 +48,13 @@
   }
 </style>
 
-<figure>
-  <img src={image} alt="" role="presentation" />
+<figure class:dark={copy}>
+  <Image
+    hero={true}
+    alt=""
+    src={image.source_url}
+    width={image.media_details.width}
+    height={image.media_details.height} />
   {#if copy}
     <figcaption>
       {#if show}

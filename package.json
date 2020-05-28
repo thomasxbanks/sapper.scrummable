@@ -1,6 +1,6 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "scrummable",
+  "description": "scrummable",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
@@ -9,7 +9,6 @@
     "start": "node __sapper__/build",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "deploy": "npm run export && cd __sapper__/export && now deploy --name scrummable",
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {

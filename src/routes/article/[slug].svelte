@@ -53,7 +53,8 @@
 </svelte:head>
 
 <Hero
-  image={post._embedded['wp:featuredmedia'][0].source_url}
+  hero={true}
+  image={post._embedded['wp:featuredmedia'][0]}
   copy={post.title.rendered} />
 <div class="central_column">
   <article class="card article">

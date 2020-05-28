@@ -19,7 +19,7 @@
   const { current, posts } = response;
   import Card from "../../components/molecule/Card.svelte";
   import Hero from "../../components/molecule/Hero.svelte";
-  import { name } from "../../Config";
+  import { name, hero } from "../../Config";
 </script>
 
 <style>
@@ -33,7 +33,7 @@
   <title>CATEGORY PAGE | {name}</title>
 </svelte:head>
 
-<Hero copy={current.name} />
+<Hero image={hero} copy={current.name} />
 <div class="central_column">
   <div class="grid">
     {#each posts as post, index}
