@@ -2,6 +2,7 @@
   import { name } from "../../Config.js";
   export let image = null;
   export let copy = null;
+  export let size = "default";
 
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
@@ -12,14 +13,18 @@
   onMount(() => {
     show = true;
   });
-
-  console.log("I AM TEH IMAAAAAAGE", image);
 </script>
 
 <style>
+  .default {
+    --size: 25rem;
+  }
+  .large {
+    --size: 50vh;
+  }
   figure {
     position: relative;
-    min-height: 50vh;
+    min-height: var(--size);
   }
   figure.dark {
     background-color: black;
@@ -29,7 +34,7 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    min-height: 50vh;
+    min-height: var(--size);
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -48,13 +53,8 @@
   }
 </style>
 
-<figure class:dark={copy}>
-  <Image
-    hero={true}
-    alt=""
-    src={image.source_url}
-    width={image.media_details.width}
-    height={image.media_details.height} />
+<figure class={size} class:dark={copy}>
+  <Image hero={true} src={image.source_url} />
   {#if copy}
     <figcaption>
       {#if show}

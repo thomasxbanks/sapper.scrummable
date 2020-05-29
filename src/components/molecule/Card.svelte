@@ -52,7 +52,10 @@
 
 <article class="card" in:fly={transition} id="post-{index}">
   {#if post._embedded && post._embedded['wp:featuredmedia']}
-    <Hero image={post._embedded['wp:featuredmedia'][0]} copy={null} />
+    <Hero
+      image={post._embedded['wp:featuredmedia'][0]}
+      copy={null}
+      size="default" />
   {/if}
   <div class="content">
     {#if post.title}

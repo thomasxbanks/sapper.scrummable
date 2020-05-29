@@ -55,7 +55,8 @@
 <Hero
   hero={true}
   image={post._embedded['wp:featuredmedia'][0]}
-  copy={post.title.rendered} />
+  copy={post.title.rendered}
+  size="large" />
 <div class="central_column">
   <article class="card article">
     <div class="content">

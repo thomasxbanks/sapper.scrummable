@@ -1,16 +1,18 @@
 <script>
   export let alt = false;
   export let classes = null;
-  export let height = null;
   export let hero = false;
   export let src = null;
-  export let width = null;
   export let lazy = false;
-
   import { beforeUpdate } from "svelte";
+  import { fade } from "svelte/transition";
 
-  let loading = true;
+  const pixel =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII=";
+
+  let progressive;
   let observer;
+  let loading = true;
 
   const cloudinarify = (url, thumb) => {
     const size = thumb ? "w_15,h_15,c_fit/" : "";
@@ -18,16 +20,26 @@
       url.split("http://scrummable.com/wp-content/uploads/")[1]
     }`;
   };
-  console.log("I AM TEH IMG:", src, cloudinarify(src));
+
+  const setImage = thumb => {
+    if (thumb.src.indexOf("scrummable/scrummable") > -1) return;
+    loading = false;
+    thumb.src = cloudinarify(src, true);
+    const full = document.createElement("img");
+    full.src = cloudinarify(src);
+    full.addEventListener("load", () => {
+      thumb.src = full.src;
+    });
+  };
 
   const onIntersect = async entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const { target } = entry;
+        setImage(target);
         observer.unobserve(target);
       }
     });
-    loading = !entries[0].isIntersecting;
   };
 
   const lazyLoad = node => {
@@ -40,11 +52,12 @@
   };
 
   beforeUpdate(() => {
-    lazy = "IntersectionObserver" in window;
+    lazy = lazy || "IntersectionObserver" in window;
     if (lazy) {
       observer = new IntersectionObserver(onIntersect, {});
     } else {
       loading = false;
+      progressive.src = cloudinarify(src);
     }
   });
 </script>
@@ -63,18 +76,16 @@
     transition: opacity var(--transition) 300ms;
   }
   .loading {
-    opacity: 0;
+    opacity: 0.5;
   }
 </style>
 
 <img
+  bind:this={progressive}
   use:lazyLoad
   class={classes}
   class:hero
   class:loading
-  src={!loading ? cloudinarify(src) : null}
-  style={loading ? `width: ${width}px; height: ${height}px` : null}
+  src={pixel}
   {alt}
-  role={!alt ? 'presentation' : null}
-  {width}
-  {height} />
+  role={!alt ? 'presentation' : null} />
