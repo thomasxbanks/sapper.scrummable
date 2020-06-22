@@ -2,7 +2,7 @@
   export async function preload({ params, query }) {
     // the `slug` parameter is available because
     // this file is called [slug].svelte
-    const res = await this.fetch(`/article/${params.slug}.json`);
+    const res = await this.fetch(`/${params.slug}.json`);
     const data = await res.json();
 
     if (res.status === 200) {
@@ -28,9 +28,9 @@
   };
   export let post;
   import { onMount } from "svelte";
-  import { name } from "../../Config.js";
-  import Hero from "../../components/molecule/Hero.svelte";
-  import Meta from "../../components/molecule/Meta.svelte";
+  import { name } from "../Config.js";
+  import Hero from "../components/molecule/Hero.svelte";
+  import Meta from "../components/molecule/Meta.svelte";
   onMount(() => {
     removeParagraphFromImages();
   });

@@ -8,9 +8,6 @@
 </script>
 
 <style>
-  .central_column {
-    width: 100%;
-  }
   a {
     font-family: "Comfortaa", sans-serif;
     color: white;

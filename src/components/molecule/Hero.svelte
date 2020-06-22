@@ -9,6 +9,8 @@
 
   import Image from "../atom/image.svelte";
 
+  console.log(">>> HERO", image);
+
   let show = false;
   onMount(() => {
     show = true;

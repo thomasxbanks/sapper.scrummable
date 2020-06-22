@@ -28,20 +28,8 @@ body {
 .grid .card {
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: calc(33.33% - 1rem);
+  flex-basis: 30rem;
   min-width: 20rem;
-}
-
-.grid .card:first-of-type {
-  flex-basis: calc(66.66% - 1rem);
-}
-
-.grid .card:nth-child(6n+7) {
-  flex-basis: calc(66.66% - 1rem);
-}
-
-.grid .card:nth-child(7n) {
-  flex-basis: calc(100% - 1rem);
 }
 
 .card {
@@ -67,8 +55,8 @@ body {
   margin-left: auto;
   padding-top: 4vh;
   padding-bottom: 4vh;
-  font-size: 1rem;
-  max-width: 67ch;
+  /* font-size: 1rem;
+  max-width: 67ch; */
 }
 
 .article .content {
@@ -82,7 +70,9 @@ body {
 
 .article .content .intro {
   font-family: 'Comfortaa', sans-serif;
-  font-size: 1.2rem;
+  --modifier: 1.2;
+  font-size: calc(1rem * var(--modifier));
+  max-width: calc(67ch / var(--modifier));
 }
 
 .article .content h1,
@@ -95,6 +85,8 @@ body {
   margin-top: 1.5em;
   margin-bottom: 0;
   position: relative;
+  font-size: calc(1rem * var(--modifier));
+  max-width: calc(67ch / var(--modifier));
 }
 
 .article .content h1:after,
@@ -104,7 +96,7 @@ body {
 .article .content h5:after,
 .article .content h6:after {
   content: "";
-  width: 25%;
+  width: 10vw;
   height: 0.125rem;
   background-color: whitesmoke;
   position: absolute;
@@ -113,31 +105,35 @@ body {
 }
 
 .article .content p {
+  --modifier: 1.15;
+  font-size: calc(1rem * var(--modifier));
+  max-width: calc(67ch / var(--modifier));
   line-height: 1.8em;
 }
 
 .article .content h1 {
-  font-size: 2rem;
+  --modifier: 2;
 }
 
 .article .content h2 {
-  font-size: 1.75rem;
+  --modifier: 1.75;
 }
 
 .article .content h3 {
-  font-size: 1.5rem;
+  --modifier: 1.5;
 }
 
 .article .content h4 {
-  font-size: 1.25rem;
+  --modifier: 1.25;
 }
 
 .article .content h5 {
-  font-size: 1.125rem;
+  --modifier: 1.125;
 }
 
 .article .content h6 {
-  font-size: 1rem;
+  --modifier: 1;
+  text-transform: uppercase;
 }
 
 .article .content a {
@@ -191,6 +187,12 @@ body {
   margin-top: 2em;
   margin-bottom: 2em;
   text-align: center;
+  max-width: calc(67ch / 1.25);
+}
+
+.article .content blockquote p {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .article .content blockquote:before,
