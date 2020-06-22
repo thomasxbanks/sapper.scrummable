@@ -69,7 +69,7 @@
     {#if post.slug}
       <div>
         <ButtonContainer>
-          <Button href="/article/{post.slug}">Read more</Button>
+          <Button href="/{post.slug}">Read more</Button>
         </ButtonContainer>
       </div>
     {/if}

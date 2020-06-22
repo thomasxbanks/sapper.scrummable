@@ -15,6 +15,11 @@
   let loading = true;
 
   const cloudinarify = (url, thumb) => {
+    console.log(url);
+    if (url.indexOf("default-hero") > -1) {
+      console.log("fallback image");
+      return url;
+    }
     const size = thumb ? "w_15,h_15,c_fit/" : "";
     return `https://res.cloudinary.com/scrummable/${size}scrummable/${
       url.split("http://scrummable.com/wp-content/uploads/")[1]

@@ -1,9 +1,10 @@
 <script>
+  export let classes = "button";
   export let href = false;
   export let size = "regular";
   export let variant = "default";
 
-  const classes = `${size} ${variant}`;
+  const classNames = `${classes} ${size} ${variant}`;
 </script>
 
 <style>
@@ -14,23 +15,29 @@
     display: inline-block;
     font-weight: bold;
     text-transform: uppercase;
+    cursor: pointer;
+    transition: box-shadow cubic-bezier(0.64, 0.22, 0.69, 0.98) 250ms;
+  }
+  a *,
+  button * {
+    pointer-events: none;
+  }
+  .default {
     margin-top: 2rem;
     margin-right: 0;
     margin-bottom: 1rem;
     margin-left: 0;
     position: relative;
-    transition: box-shadow cubic-bezier(0.64, 0.22, 0.69, 0.98) 250ms;
-    cursor: pointer;
     color: #343840;
   }
-  a:after,
-  button:after,
-  a:before,
-  button:before {
+  .default:after,
+  .default:after,
+  .default:before,
+  .default:before {
     color: #a1213d;
   }
-  a:before,
-  button:before {
+  .default:before,
+  .default:before {
     content: "";
     height: 0.25rem;
     background-color: currentColor;
@@ -38,19 +45,19 @@
     bottom: 0;
     border-radius: 500rem;
   }
-  a:after,
-  button:after {
+  .default:after,
+  .default:after {
     content: "〉";
     font-size: 1.25em;
     margin-inline-start: 0.5ch;
     position: absolute;
   }
-  a:hover:after,
-  button:hover:after {
+  .default:hover:after,
+  .default:hover:after {
     animation: arrowbounce ease 600ms 1 300ms;
   }
-  a:hover:before,
-  button:hover:before {
+  .default:hover:before,
+  .default:hover:before {
     animation: underline ease 600ms 1;
   }
   a {
@@ -65,7 +72,16 @@
   .large {
     font-size: 1.25rem;
   }
-
+  .fixed-width {
+    width: 11rem;
+  }
+  .primary {
+    background-color: #a1213d;
+    color: white;
+  }
+  .primary:hover {
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.6);
+  }
   @keyframes arrowbounce {
     0% {
       transform: translateX(0);
@@ -104,11 +120,11 @@
 </style>
 
 {#if href}
-  <a {href} rel="prefetch" class={classes}>
+  <a {href} rel="prefetch" class={classNames}>
     <slot />
   </a>
 {:else}
-  <button class={classes} on:click>
+  <button class={classNames} on:click>
     <slot />
   </button>
 {/if}
